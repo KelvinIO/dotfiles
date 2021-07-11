@@ -1,0 +1,290 @@
+
+[colors]
+background = #212121
+background-alt = #FF5555
+background-alt-2 = #EDC474
+background-alt-3 = #282a36
+
+foreground = #FFFFFF
+foreground-alt = #BD93F9
+foreground-urgent = #EDC474
+
+transparent = #00FFFFFF
+
+
+[bar/base]
+monitor = eDP-1-1
+
+bottom = false
+
+fixed-center = true
+
+width = 400
+height = 25
+
+offset-x = 450 
+offset-y = 
+
+override-redirect = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+radius = 0.0
+padding =
+module-margin = 5
+
+font-0 = Noto Sans:pixelsize=13;2
+font-1 = Font Awesome 5 Brands Regular:style=Regular;2
+font-2 = Font Awesome 5 Free Solid:style=Solid;2
+font-3 = Font Awesome 5 Free Regular:style=Regular;2
+
+separator = "|"
+spacing = 0
+dim-value = 1.0
+
+tray-position = none
+
+tray-detached = false
+
+tray-background = ${colors.background}
+tray-foreground = ${colors.foreground}
+
+tray-padding = 3
+
+tray-scale = 1.0
+
+
+[bar/left-top]
+inherit = bar/base
+
+width = 350
+height = 30
+
+offset-x = 10
+offset-y = 8 
+
+override-redirect = true
+wm-restack = i3
+
+modules-left = 
+modules-center = i3
+modules-right =
+
+
+[bar/center-top]
+inherit = bar/base
+
+width = 400
+height = 30
+
+offset-x = 760
+offset-y = 8 
+
+override-redirect = true
+wm-restack = i3
+
+modules-left =
+modules-center = date time
+modules-right =
+
+
+[bar/right-top]
+inherit = bar/base
+
+width = 600
+height = 30
+
+offset-x = 1310 
+offset-y = 8
+
+override-redirect = true
+wm-restack = i3
+
+modules-left =
+modules-center = battery volume wifi powermenu
+modules-right =
+
+
+[module/time]
+type = internal/date
+
+interval = 1.0
+
+time = %I : %M %p
+
+time-alt = %H:%M:%S
+
+format = <label>
+
+format-background = ${colors.background}
+format-foreground = ${colors.foreground}
+
+format-padding = 3
+
+label = %time%
+
+label-foreground = ${colors.foreground}
+
+
+[module/date]
+type = internal/date
+
+interval = 300.0
+
+date = %a, %d %b
+
+date-alt = %A, %d.%m.%Y
+
+format = <label>
+
+format-background = ${colors.background}
+format-foreground = ${colors.foreground}
+
+format-padding = 3
+
+label = %date% 
+
+label-foreground = ${colors.foreground}
+
+
+[module/battery]
+type = internal/battery
+full-at = 99
+battery = BAT0
+adapter = ADP1
+poll-interval = 5
+
+format-charging =  <label-charging>
+format-discharging = <ramp-capacity>  <label-discharging>
+format-full = <ramp-capacity>  <label-full>
+format-charging-padding = 3
+format-discharging-padding = 3
+format-full-padding = 3
+
+label-charging = %percentage%%
+label-discharging = %percentage%%
+label-full = %percentage%%
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+
+[module/volume]
+type = internal/pulseaudio
+
+interval = 5
+
+format-volume = <ramp-volume> <label-volume>
+format-muted = <label-muted>
+
+label-volume = %percentage%%
+label-muted =  muted
+label-muted-foreground = ${colors.foreground-alt}
+
+format-volume-padding = 3
+format-muted-padding = 3
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+
+[module/powermenu]
+type = custom/menu
+
+label-open =  
+label-close = cancel
+label-open-padding = 2 
+label-close-padding = 5 
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+menu-0-0-padding = 3
+menu-0-1-padding = 3
+
+menu-1-0 = reboot?  
+menu-1-0-exec = reboot
+menu-1-0-padding = 3
+
+menu-2-0 = power off?  
+menu-2-0-exec = poweroff
+menu-2-0-padding = 3
+
+format-background = ${colors.background-alt}
+format-foreground = ${colors.foreground}
+
+
+[module/i3]
+type = internal/i3
+
+pin-workspaces = true
+strip-wsnumbers = true
+
+index-sort = false
+enable-click = true
+enable-scroll = true
+
+format = <label-state> 
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 10;
+ws-icon-default = 
+
+label-focused = %icon%
+label-focused-background = ${colors.background-alt-2}
+label-focused-foreground = ${colors.background}
+
+label-focused-padding = 3
+label-unfocused = %icon%
+label-unfocused-padding = 3
+
+label-occupied = %icon%
+label-occupied-padding = 3
+
+label-urgent = %icon%
+label-urgent-underline= ${colors.foreground-urgent}
+label-urgent-padding = 3
+
+label-empty = %icon%
+label-empty-foreground = ${colors.background-alt}
+label-empty-padding = 3
+
+label-visible = %icon%
+label-visible-background = ${colors.background-alt-3}
+label-visible-underline= ${colors.foreground}
+label-visible-padding = 3
+
+
+[module/wifi]
+type = internal/network
+
+interface = wlan0
+
+interval = 10
+
+format-connected =   
+format-connected-padding = 3
+
+format-disconnected = <label-disconnected>
+format-disconnected-padding = 3
+
+label-connected = %essid%
+label-connected-foreground = ${colors.foreground}
+
+label-disconnected = disconnected
+label-disconnected-foreground = ${colors.foreground-alt}
+
+label-packetloss = %essid%
+label-packetloss-foreground = ${colors.foreground-urgent}
+
+animation-packetloss-framerate = 500
